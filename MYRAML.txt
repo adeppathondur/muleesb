@@ -1,0 +1,47 @@
+#%RAML 0.8
+---
+title: ESB  Services
+version: v0.1
+#baseUri: http://csi-rentokil/api/esb
+baseUri: http://mocksvc.mulesoft.com/mocks/489a0c4a-7cf2-4a2d-951e-64553f2d06bc/api/
+
+/premiseConfigDetails: 
+ get:
+   description: get details from premise config table based on accountno, contracttype, premiseno for customer support facilities
+   queryParameters:
+     accntNo: 
+       displayName: accntNo
+       description: account no releted to get configuration details
+       required: true
+       type: integer
+       example: 101
+     cntrctType: 
+       displayName: cntrctType
+       description: contract type related to get configuration details
+       required: true
+       type: string
+       example: selfcontract
+     prmsNo: 
+       displayName: prmsNo
+       description: premise number related to get configuration details    
+       required: true
+       type: integer
+       example: 10
+   responses:
+     200: 
+       body:
+         application/json:
+           example: !include customersupportfacilities/example/get_customersupportfacilities_to_update.json
+           schema: !include customersupportfacilities/schemas/get_customerSupportFacilities_schema.json
+ post:
+   description: insert or update customer support facilities in premise config table
+   body: 
+     application/json: 
+       example: !include customersupportfacilities/example/update_customerSupportFacilities.json
+       schema: !include customersupportfacilities/schemas/update_customerSupportFacilities_schema.json
+   responses:
+     200:
+       body:
+         application/json:    
+           example: !include customersupportfacilities/example/update_customerSupportFacilities_response.json
+           schema: !include customersupportfacilities/schemas/update_customerSupportFacilities_response_schema.json            
